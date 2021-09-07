@@ -104,5 +104,26 @@ namespace KMZI_2
         //    //}
         //    return key;
         //}
+
+
+
+        //int[] generate_key(int startIndex, int length)
+        //{
+        //    int a = 936; // Множитель (0 <= a < mod)
+        //    int c = 1399; // Приращение (0 <= c < mod)
+        //    int x = startIndex; // Начальное значение (0 <= x < mod)
+        //    int[] key = new int[text_byte.Length];
+        //    key[0] = x;
+
+        //    for (int i = 1; i < length; i++)
+        //    {
+        //        key[i] = (a * key[i - 1] + c) % mod;
+        //    }
+        //    //for (int i = 0; i < length; i++)
+        //    //{
+        //    //    key[i] %= 256;
+        //    //}
+        //    return key;
+        //}
     }
 }
