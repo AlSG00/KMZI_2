@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 using System.Numerics;
 namespace KMZI_2
 {
-    class BasicNumberTheoryMath
+    public class BasicNumberTheoryMath
     {
+       // PrimeNumbers pNumbers = new PrimeNumbers();
+
         public BigInteger Find_ModularExpo(BigInteger a, BigInteger x, BigInteger p)
         {
-            //string x1 = Convert.ToString(x, 2);
-            if( x < 0)
+            if(x < 0)
             {
-                x = Find_Inversion(x, p);
+                a = Find_Inversion(a, p);
+                x = AbsValue(x);
             }
 
             string x1 = Convert_ToBinary(x);
@@ -35,8 +37,8 @@ namespace KMZI_2
 
         public BigInteger Find_GCD(BigInteger a, BigInteger b)
         {
-           // a = Math.Abs(a);
-           // b = Math.Abs(b);
+            a = AbsValue(a);
+            b = AbsValue(b);
 
             while (b != 0)
             {
@@ -44,23 +46,43 @@ namespace KMZI_2
                 b = a % b;
                 a = temp;
             }
-            return a;
 
+            return a;
         }
 
         public int Find_Inversion(BigInteger x, BigInteger p)//чекнуть
         {
             int d = 0;
-            if (Find_GCD(x, p) == 1)
+            if(Find_GCD(x, p) == 1)
             {              
-                while (x * d % p != 1)
+                while(d < p)
                 {
-                    d++;
+                    if(x * d % p != 1)
+                    {
+                        d++;
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
+
             return d;
         }
 
+        //Функция специально для BigInteger
+        public BigInteger AbsValue(BigInteger x)
+        {
+            if(x < 0)
+            {
+                return x * (-1);
+            }
+
+            return x;
+        }
+
+        // Генератор псевдослуайных чисел для BigInteger
         public BigInteger PRNG (BigInteger seed)
         {
             BigInteger result = 0;
@@ -86,27 +108,6 @@ namespace KMZI_2
 
             return result;
         }
-        //int[] generate_key(int startIndex, int length)
-        //{
-        //    int a = 936; // Множитель (0 <= a < mod)
-        //    int c = 1399; // Приращение (0 <= c < mod)
-        //    int x = startIndex; // Начальное значение (0 <= x < mod)
-        //    int[] key = new int[text_byte.Length];
-        //    key[0] = x;
-
-        //    for (int i = 1; i < length; i++)
-        //    {
-        //        key[i] = (a * key[i - 1] + c) % mod;
-        //    }
-        //    //for (int i = 0; i < length; i++)
-        //    //{
-        //    //    key[i] %= 256;
-        //    //}
-        //    return key;
-        //}
-
-
-
         //int[] generate_key(int startIndex, int length)
         //{
         //    int a = 936; // Множитель (0 <= a < mod)

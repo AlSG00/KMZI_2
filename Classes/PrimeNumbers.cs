@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace KMZI_2
 {
-    class PrimeNumbers
+    public class PrimeNumbers : BasicNumberTheoryMath
     {
-        long[] primeCollection = { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 57 };
+       public long[] primeCollection = { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 57 };
 
         public int primeMin = 255;
         public int primeMax = 2147483647;
 
+        //BasicNumberTheoryMath basicMath = new BasicNumberTheoryMath();
+
         public bool IsPrime(long digit)
         {
-            if (primeCollection.Contains(digit))
-            {
-                return true;
-            }
-            else
-            {
+            //if (primeCollection.Contains(digit))
+            //{
+            //    return true;
+            //}
+            //else
+            //{
                 if (digit > 1 && digit % 2 != 0)
                 {
                     for (int i = 3; i < Math.Sqrt(digit); i += 2)
@@ -35,7 +38,7 @@ namespace KMZI_2
                 }
 
                 return false;
-            }
+           // }
         }
 
         /// <summary>
@@ -98,6 +101,18 @@ namespace KMZI_2
             }
 
             return pair;
+        }
+
+        public bool AreCoprime(BigInteger a, BigInteger b)
+        {
+            BigInteger x = Find_GCD(a, b);
+
+            if(x != 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

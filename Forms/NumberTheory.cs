@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Collections;
+using System.Numerics;
+
 
 namespace KMZI_2
 {
@@ -28,9 +31,11 @@ namespace KMZI_2
             label2.Text = "";
             label3.Text = "";
             label4.Text = "";
+
+            //BasicNumberTheoryMath basicMath = new BasicNumberTheoryMath();
         }
 
-        BasicNumberTheoryMath basicMath = new BasicNumberTheoryMath();
+       public BasicNumberTheoryMath basicMath = new BasicNumberTheoryMath();
 
         private void button_Calculate_Click(object sender, EventArgs e)
         {
@@ -52,13 +57,27 @@ namespace KMZI_2
 
         private void Perform_ModularExpo()
         {
-            if (long.TryParse(textBox1.Text, out long a) && a > 0)
+            if (BigInteger.TryParse(textBox1.Text, out BigInteger a) && a > 0)
             {
-                if (long.TryParse(textBox2.Text, out long x) /*&& x > 0*/)
+                if (BigInteger.TryParse(textBox2.Text, out BigInteger x) /*&& x > 0*/)
                 {
-                    if (long.TryParse(textBox3.Text, out long p))
+                    if (BigInteger.TryParse(textBox3.Text, out BigInteger p) && p > 0)
                     {
-                        textBox_Answer.Text = Convert.ToString(basicMath.Find_ModularExpo(a, x, p));
+                        if (x < 0)
+                        {
+                            if (basicMath.Find_GCD(x, p) == 1)
+                            {
+                                textBox_Answer.Text = Convert.ToString(basicMath.Find_ModularExpo(a, x, p));
+                            }
+                            else
+                            {
+                                MessageBox.Show("Основание и модуль н еявляются взаимно простыми", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            textBox_Answer.Text = Convert.ToString(basicMath.Find_ModularExpo(a, x, p));
+                        }
                     }
                     else
                     {
@@ -78,9 +97,9 @@ namespace KMZI_2
 
         private void Perform_GCD()
         {
-            if (long.TryParse(textBox1.Text, out long a))
+            if (BigInteger.TryParse(textBox1.Text, out BigInteger a))
             {
-                if (long.TryParse(textBox2.Text, out long b))
+                if (BigInteger.TryParse(textBox2.Text, out BigInteger b))
                 {
                     textBox_Answer.Text = Convert.ToString(basicMath.Find_GCD(a, b));
                 }
@@ -97,11 +116,18 @@ namespace KMZI_2
 
         private void Perform_Inversion()
         {
-            if (int.TryParse(textBox1.Text, out int x))
+            if (BigInteger.TryParse(textBox1.Text, out BigInteger x) && x > 0)
             {
-                if (int.TryParse(textBox2.Text, out int p))
+                if (BigInteger.TryParse(textBox2.Text, out BigInteger p) && p > 0)
                 {
-                    textBox_Answer.Text = Convert.ToString(basicMath.Find_Inversion(x, p));
+                    if (basicMath.Find_GCD(x, p) == 1)
+                    {
+                        textBox_Answer.Text = Convert.ToString(basicMath.Find_Inversion(x, p));
+                    }
+                    else
+                    {
+                        MessageBox.Show("Основание и модуль н еявляются взаимно простыми", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
