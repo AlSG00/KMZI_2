@@ -32,6 +32,7 @@ namespace KMZI_2
 
         NumberTheory numTheory;
         RSA rsa;
+        
 
         private void button_basicTheory_Click(object sender, EventArgs e)
         {

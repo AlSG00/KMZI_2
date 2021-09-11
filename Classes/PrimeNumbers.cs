@@ -10,7 +10,7 @@ namespace KMZI_2
     {
         long[] primeCollection = { 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 57 };
 
-        public int primeMin = 255;
+        public int primeMin = 3;
         public int primeMax = 2147483647;
 
         public bool IsPrime(long digit)
@@ -23,7 +23,7 @@ namespace KMZI_2
             {
                 if (digit > 1 && digit % 2 != 0)
                 {
-                    for (int i = 3; i < Math.Sqrt(digit); i += 2)
+                    for (int i = 3; i < Math.Sqrt(digit) + 1; i++)
                     {
                         if (digit % i == 0)
                         {
@@ -51,7 +51,7 @@ namespace KMZI_2
             {
                 i--;
             }
-            if (IsPrime(i) && i > primeMin)
+            if (IsPrime(i) && i >= primeMin)
             {
                 pair[0] = i;
             }
@@ -75,9 +75,13 @@ namespace KMZI_2
             else
             {
                 i = seed;
-                while ((!IsPrime(i) || i == pair[0]) || i < primeMin)
+                while ((!IsPrime(i) || i == pair[0]) && i < primeMax)
                 {
                     i++;
+                    //if (i == pair[0])
+                    //{
+                    //    i++;
+                    //}
                 }
                 if (IsPrime(i))
                 {
