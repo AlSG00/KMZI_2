@@ -84,6 +84,12 @@
     <Compile Include="Forms\StartForm.Designer.cs">
       <DependentUpon>StartForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\RSA_SaveType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RSA_SaveType.Designer.cs">
+      <DependentUpon>RSA_SaveType.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\NumberTheory.resx">
       <DependentUpon>NumberTheory.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\StartForm.resx">
       <DependentUpon>StartForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RSA_SaveType.resx">
+      <DependentUpon>RSA_SaveType.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
