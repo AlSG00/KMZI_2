@@ -31,9 +31,10 @@
             this.button_basicTheory = new System.Windows.Forms.Button();
             this.button_RSA = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.button_DiMan = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button_exit = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -45,7 +46,6 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -79,14 +79,15 @@
             this.button3.Text = "***";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // button_DiMan
             // 
-            this.button4.Location = new System.Drawing.Point(6, 77);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(196, 23);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "***";
-            this.button4.UseVisualStyleBackColor = true;
+            this.button_DiMan.Location = new System.Drawing.Point(6, 77);
+            this.button_DiMan.Name = "button_DiMan";
+            this.button_DiMan.Size = new System.Drawing.Size(196, 23);
+            this.button_DiMan.TabIndex = 3;
+            this.button_DiMan.Text = "Диффи-Хеллман";
+            this.button_DiMan.UseVisualStyleBackColor = true;
+            this.button_DiMan.Click += new System.EventHandler(this.button_DiMan_Click);
             // 
             // menuStrip1
             // 
@@ -106,6 +107,12 @@
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // выходToolStripMenuItem
+            // 
+            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.выходToolStripMenuItem.Text = "Выход";
             // 
             // справкаToolStripMenuItem
             // 
@@ -134,7 +141,7 @@
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.button_basicTheory);
-            this.groupBox1.Controls.Add(this.button4);
+            this.groupBox1.Controls.Add(this.button_DiMan);
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button_RSA);
             this.groupBox1.Location = new System.Drawing.Point(13, 28);
@@ -215,12 +222,6 @@
             this.button6.Text = "***";
             this.button6.UseVisualStyleBackColor = true;
             // 
-            // выходToolStripMenuItem
-            // 
-            this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.выходToolStripMenuItem.Text = "Выход";
-            // 
             // StartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -245,7 +246,7 @@
         private System.Windows.Forms.Button button_basicTheory;
         private System.Windows.Forms.Button button_RSA;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button_DiMan;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem справкаToolStripMenuItem;

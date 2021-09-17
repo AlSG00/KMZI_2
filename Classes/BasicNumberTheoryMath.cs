@@ -50,25 +50,47 @@ namespace KMZI_2
             return a;
         }
 
-        public int Find_Inversion(BigInteger x, BigInteger p)//чекнуть
+        public BigInteger Find_Inversion(BigInteger x, BigInteger mod)
         {
-            int d = 0;
-            if(Find_GCD(x, p) == 1)
-            {              
-                while(d < p)
+            BigInteger result = 0;
+            BigInteger q = 0;
+            BigInteger[] U = { mod, 1, 0 };
+            BigInteger[] V = { x, 0, 1 };
+            BigInteger[] T = { 0, 0, 0 };
+
+            while (true)
+            {
+                if (V[0] == 0)
                 {
-                    if(x * d % p != 1)
+                    result = U[2];
+                    break;
+                }
+                else
+                {
+                    q = U[0] / V[0];
+
+                    T[0] = U[0] % V[0];
+                    T[1] = U[1] - q * V[1];
+                    T[2] = U[2] - q * V[2];
+
+                    for (int i = 0; i < 3; i++)
                     {
-                        d++;
-                    }
-                    else
-                    {
-                        break;
+                        U[i] = V[i];
+                        V[i] = T[i];
                     }
                 }
             }
 
-            return d;
+            if (result < 0)
+            {
+                result += mod;
+            }
+            if (result * x % mod != 1)
+            {
+                return 0;
+            }
+
+            return result;
         }
 
         //Функция специально для BigInteger
@@ -108,23 +130,5 @@ namespace KMZI_2
 
             return result;
         }
-        //int[] generate_key(int startIndex, int length)
-        //{
-        //    int a = 936; // Множитель (0 <= a < mod)
-        //    int c = 1399; // Приращение (0 <= c < mod)
-        //    int x = startIndex; // Начальное значение (0 <= x < mod)
-        //    int[] key = new int[text_byte.Length];
-        //    key[0] = x;
-
-        //    for (int i = 1; i < length; i++)
-        //    {
-        //        key[i] = (a * key[i - 1] + c) % mod;
-        //    }
-        //    //for (int i = 0; i < length; i++)
-        //    //{
-        //    //    key[i] %= 256;
-        //    //}
-        //    return key;
-        //}
     }
 }

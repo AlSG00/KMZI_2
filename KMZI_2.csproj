@@ -63,6 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\BasicNumberTheoryMath.cs" />
+    <Compile Include="Diffi-Hellman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Diffi-Hellman.Designer.cs">
+      <DependentUpon>Diffi-Hellman.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\NumberTheory.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     <Compile Include="Forms\RSA_SaveType.Designer.cs">
       <DependentUpon>RSA_SaveType.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Diffi-Hellman.resx">
+      <DependentUpon>Diffi-Hellman.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\NumberTheory.resx">
       <DependentUpon>NumberTheory.cs</DependentUpon>
     </EmbeddedResource>

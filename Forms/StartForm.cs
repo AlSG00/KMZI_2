@@ -18,7 +18,7 @@ namespace KMZI_2
 
             button_basicTheory.Enabled = true;
             button_RSA.Enabled = true;
-            button4.Enabled = false;
+            button_DiMan.Enabled = true;
             button3.Enabled = false;
             button11.Enabled = false;
             button6.Enabled = false;
@@ -32,6 +32,7 @@ namespace KMZI_2
 
         NumberTheory numTheory;
         RSA rsa;
+        Diffi_Hellman diMan;
         
 
         private void button_basicTheory_Click(object sender, EventArgs e)
@@ -60,9 +61,24 @@ namespace KMZI_2
             }
         }
 
+        private void button_DiMan_Click(object sender, EventArgs e)
+        {
+            if (diMan == null || diMan.IsDisposed)
+            {
+                diMan = new Diffi_Hellman();
+                diMan.Show();
+            }
+            else
+            {
+                diMan.Activate();
+            }
+        }
+
         private void button_exit_Click(object sender, EventArgs e)
         {
             Close();
         }
+
+
     }
 }

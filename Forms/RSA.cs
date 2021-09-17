@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Collections;
 using System.Numerics;
+
 namespace KMZI_2
 {
     public partial class RSA : Form
@@ -39,7 +40,7 @@ namespace KMZI_2
         BigInteger euler;
         BigInteger exp;
         BigInteger d;
-        int[] primePair;
+
         char[] charSeparators = new char[] { ' ' };
         byte[] inFile;
         byte[] outFile;
@@ -65,7 +66,7 @@ namespace KMZI_2
             }
             outFile = new byte[inFile.Length];
             test_out = new BigInteger[inFile.Length];
-
+            int h = 0;
             // Шифрование
             if (radioButton1.Checked)
             {
@@ -73,8 +74,8 @@ namespace KMZI_2
                 {
                     test_out[i] = basicMath.Find_ModularExpo(test_in[i], exp, n);
                     outFile[i] = (byte)(test_out[i] % 256);
+                    h++;
                 }
-
                 text_out.Text = Encoding.Default.GetString(outFile);
             }
 
@@ -93,23 +94,50 @@ namespace KMZI_2
 
         private void button_generateKey_Click(object sender, EventArgs e)
         {
-            primePair = pNumbers.GeneratePrimePair(Convert.ToInt32(text_seed.Text));
+            if(text_p.TextLength == 0 || text_q.TextLength == 0 || text_p.TextLength > 100 || text_q.TextLength > 100)
+            {
+                MessageBox.Show("Минимум одно из чисел отсутствует или введено неверно", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
 
-            p = primePair[0];
-            q = primePair[1];
+            p = BigInteger.Parse(text_p.Text);
+            q = BigInteger.Parse(text_q.Text);
+
+            GenerateKey();
+        }
+
+        private void GenerateKey()
+        {
+            if(!pNumbers.IsPrime(p) || !pNumbers.IsPrime(q) || p == 1 || q == 1)
+            {
+                MessageBox.Show("Одно из чисел не является простым", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (p == q)
+            {
+                MessageBox.Show("Числа равны", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
 
             n = p * q;
 
             euler = (p - 1) * (q - 1);
 
             exp = GetExp(euler);
-            if(exp == 0)
+
+            if (exp == 0)
             {
                 EraseKey();
                 return;
             }
 
             d = basicMath.Find_Inversion(exp, euler);
+            if (d == 0)
+            {
+                MessageBox.Show("Секретная экспонента не найдена");
+                return;
+            }
 
             label2.Text = "p = " + p.ToString();
             label3.Text = "q = " + q.ToString();
@@ -121,17 +149,16 @@ namespace KMZI_2
 
         private BigInteger GetExp(BigInteger x)
         {
-            int y = int.MaxValue / 4;
-            long result = 10000000;
-            while(!pNumbers.IsPrime(result) || basicMath.Find_GCD(result, x) != 1 || result >= x)
+            BigInteger result = p / int.MaxValue;
+
+            while ( result > int.MaxValue)
             {
-               // result--;
-                result = rnd.Next(3, y);
-                if (result == 0)
-                {
-                    MessageBox.Show("Не удалось подобрать число", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
-                    return 0;
-                }
+                result /= 2;
+            }
+
+            while (!pNumbers.IsPrime(result) || basicMath.Find_GCD(result, x) != 1 || result >= x)
+            {
+                result++;
             }
 
             return result;
@@ -144,15 +171,15 @@ namespace KMZI_2
 
         private void text_seed_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < text_seed.TextLength; i++)
+            for (int i = 0; i < text_p.TextLength; i++)
             {
-                if (!Char.IsDigit(text_seed.Text[i]))
+                if (!Char.IsDigit(text_p.Text[i]))
                 {
-                    text_seed.Text= text_seed.Text.Replace(text_seed.Text[i].ToString(), "");
+                    text_p.Text= text_p.Text.Replace(text_p.Text[i].ToString(), "");
                 }
             }
 
-            if (text_seed.TextLength > 4 || text_seed.TextLength == 0)
+            if (text_p.TextLength > 100 || text_p.TextLength == 0)
             {
                 button_generateKey.Enabled = false;
             }
@@ -197,7 +224,7 @@ namespace KMZI_2
                 text_in.Clear();
                 text_in.Text = text_out.Text;
 
-                // Для удобства шифроваание автоматически переклчается на расшифрование и обратно
+                // Для удобства шифрование автоматически переклчается на расшифрование и обратно
                 if (radioButton1.Checked)
                 {
                     radioButton2.Checked = true;
@@ -385,7 +412,8 @@ namespace KMZI_2
 
         private void EraseKey()
         {
-            text_seed.Clear();
+            text_p.Clear();
+            text_q.Clear();
 
             p = 0;
             q = 0;
@@ -410,6 +438,35 @@ namespace KMZI_2
             is_text_from_file = false;
 
             text_in.Clear();
+        }
+
+        private void button_RandomKey_Click(object sender, EventArgs e)
+        {
+            text_p.Clear();
+            text_q.Clear();
+
+            text_p.Text = pNumbers.GeneratePrime();           
+            text_q.Text = pNumbers.GeneratePrime();
+        }
+
+        private void text_q_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < text_q.TextLength; i++)
+            {
+                if (!Char.IsDigit(text_q.Text[i]))
+                {
+                    text_q.Text = text_q.Text.Replace(text_q.Text[i].ToString(), "");
+                }
+            }
+
+            if (text_q.TextLength > 100 || text_q.TextLength == 0)
+            {
+                button_generateKey.Enabled = false;
+            }
+            else
+            {
+                button_generateKey.Enabled = true;
+            }
         }
     }
 }
