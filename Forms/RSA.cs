@@ -445,8 +445,8 @@ namespace KMZI_2
             text_p.Clear();
             text_q.Clear();
 
-            text_p.Text = pNumbers.GeneratePrime();           
-            text_q.Text = pNumbers.GeneratePrime();
+            text_p.Text = pNumbers.GeneratePrime(100);           
+            text_q.Text = pNumbers.GeneratePrime(100);
         }
 
         private void text_q_TextChanged(object sender, EventArgs e)

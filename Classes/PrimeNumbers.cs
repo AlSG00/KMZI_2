@@ -167,11 +167,11 @@ namespace KMZI_2
             return true;
         }
 
-        public string GeneratePrime()
+        public string GeneratePrime(int length)
         {
             bool isPrime = false;
 
-            BigInteger primeSize = BigInteger.Pow(10, 99);
+            BigInteger primeSize = BigInteger.Pow(10, length - 1);
             BigInteger result = 0;
 
             while (!isPrime)
