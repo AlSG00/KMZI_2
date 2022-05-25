@@ -53,8 +53,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button_clearAll = new System.Windows.Forms.Button();
             this.text_length = new System.Windows.Forms.TextBox();
+            this.button_clearAll = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -64,6 +64,7 @@
             // 
             this.textBox.Location = new System.Drawing.Point(79, 19);
             this.textBox.Name = "textBox";
+            this.textBox.ReadOnly = true;
             this.textBox.Size = new System.Drawing.Size(141, 20);
             this.textBox.TabIndex = 0;
             this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
@@ -298,6 +299,14 @@
             this.groupBox3.TabIndex = 16;
             this.groupBox3.TabStop = false;
             // 
+            // text_length
+            // 
+            this.text_length.Location = new System.Drawing.Point(28, 19);
+            this.text_length.Name = "text_length";
+            this.text_length.Size = new System.Drawing.Size(45, 20);
+            this.text_length.TabIndex = 13;
+            this.text_length.TextChanged += new System.EventHandler(this.text_length_TextChanged);
+            // 
             // button_clearAll
             // 
             this.button_clearAll.Location = new System.Drawing.Point(351, 17);
@@ -307,14 +316,6 @@
             this.button_clearAll.Text = "С";
             this.button_clearAll.UseVisualStyleBackColor = true;
             this.button_clearAll.Click += new System.EventHandler(this.button_clearAll_Click);
-            // 
-            // text_length
-            // 
-            this.text_length.Location = new System.Drawing.Point(28, 19);
-            this.text_length.Name = "text_length";
-            this.text_length.Size = new System.Drawing.Size(45, 20);
-            this.text_length.TabIndex = 13;
-            this.text_length.TextChanged += new System.EventHandler(this.text_length_TextChanged);
             // 
             // Diffi_Hellman
             // 

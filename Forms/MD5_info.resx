@@ -117,14 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="File-icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\File-icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="label7.Text" xml:space="preserve">
+    <value>Важно: когда вы применяете получение хэш-значения файла, получение хэш-значения 
+введенного текста становится недоступным до тех пор, пока вы не закроете файл. Чтобы 
+сделать это, кликните по появившейся иконке "Файл открыт" в правой части окна 
+или по кнопке "Очистить ввод"</value>
   </data>
-  <data name="File-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\File-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="free-icon-clear-3602317" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\free-icon-clear-36023171.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="label8.Text" xml:space="preserve">
+    <value>1. Кликните по вкладке "Файл" в левом верхнем углу экрана. 
+    В правой части окна вы увидите появившийся значок "Файл открыт", 
+    сигнализирующий пользователю о том, что программа ведёт рабботу с файлом.
+</value>
   </data>
 </root>

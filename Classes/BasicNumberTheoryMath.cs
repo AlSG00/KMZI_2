@@ -8,7 +8,6 @@ namespace KMZI_2
 {
     public class BasicNumberTheoryMath
     {
-       // PrimeNumbers pNumbers = new PrimeNumbers();
 
         public BigInteger Find_ModularExpo(BigInteger a, BigInteger x, BigInteger p)
         {
@@ -18,7 +17,7 @@ namespace KMZI_2
                 x = AbsValue(x);
             }
 
-            string x1 = Convert_ToBinary(x);
+            string x1 = Convert_ToBinary(x, 0, false);
 
             BigInteger answer = a;
             for (int i = 1; i < x1.Length; i++)
@@ -32,7 +31,7 @@ namespace KMZI_2
                     answer = answer * answer % p;
                 }
             }
-            return answer;
+            return answer % p;
         }
 
         public BigInteger Find_GCD(BigInteger a, BigInteger b)
@@ -104,14 +103,7 @@ namespace KMZI_2
             return x;
         }
 
-        // Генератор псевдослуайных чисел для BigInteger
-        public BigInteger PRNG (BigInteger seed)
-        {
-            BigInteger result = 0;
-            return result;
-        }
-
-        public string Convert_ToBinary(BigInteger dec)
+        public string Convert_ToBinary(BigInteger dec, int minLength, bool cut)
         {
             string result = "";
             while(dec > 1)
@@ -127,6 +119,21 @@ namespace KMZI_2
                 dec /= 2;
             }
             result = result.Insert(0, "1");
+
+            while (result.Length < minLength)
+            {
+                result = result.Insert(0, "0");
+            }
+
+            if (cut == true)
+            {
+                string temp = "";
+                for (int i = 0; i < minLength; i++)
+                {
+                    temp = temp.Insert(0, result[result.Length - 1 - i].ToString());
+                }
+                result = temp;
+            }
 
             return result;
         }

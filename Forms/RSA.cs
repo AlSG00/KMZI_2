@@ -54,6 +54,8 @@ namespace KMZI_2
         {
             text_out.Clear();
 
+            
+
             if (is_text_from_file == false && test_in == null)
             {
                 inFile = Encoding.Default.GetBytes(text_in.Text);
@@ -66,7 +68,11 @@ namespace KMZI_2
             }
             outFile = new byte[inFile.Length];
             test_out = new BigInteger[inFile.Length];
-            int h = 0;
+
+            progressBar1.Value = 0;
+            progressBar1.Maximum = test_in.Length;
+            progressBar1.Step = 1;
+
             // Шифрование
             if (radioButton1.Checked)
             {
@@ -74,7 +80,7 @@ namespace KMZI_2
                 {
                     test_out[i] = basicMath.Find_ModularExpo(test_in[i], exp, n);
                     outFile[i] = (byte)(test_out[i] % 256);
-                    h++;
+                    progressBar1.PerformStep();
                 }
                 text_out.Text = Encoding.Default.GetString(outFile);
             }
@@ -86,8 +92,8 @@ namespace KMZI_2
                 {
                     test_out[i] = basicMath.Find_ModularExpo(test_in[i], d, n);
                     outFile[i] = (byte)(test_out[i] % 256);
-                }
-                
+                    progressBar1.PerformStep();
+                }               
                 text_out.Text = Encoding.Default.GetString(outFile);
             }
         }
@@ -106,9 +112,9 @@ namespace KMZI_2
             GenerateKey();
         }
 
-        private void GenerateKey()
+        public void GenerateKey()
         {
-            if(!pNumbers.IsPrime(p) || !pNumbers.IsPrime(q) || p == 1 || q == 1)
+            if(!pNumbers.IsPrime(p, false) || !pNumbers.IsPrime(q, false) || p == 1 || q == 1)
             {
                 MessageBox.Show("Одно из чисел не является простым", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                 return;
@@ -121,10 +127,15 @@ namespace KMZI_2
             }
 
             n = p * q;
+            if (n < 255)
+            {
+                MessageBox.Show("Модуль слишком мал", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
 
             euler = (p - 1) * (q - 1);
 
-            exp = GetExp(euler);
+            exp = GetExp(euler, p);
 
             if (exp == 0)
             {
@@ -147,7 +158,7 @@ namespace KMZI_2
             label7.Text = "d = " + d.ToString();
         }
 
-        private BigInteger GetExp(BigInteger x)
+        public BigInteger GetExp(BigInteger x, BigInteger p)
         {
             BigInteger result = p / int.MaxValue;
 
@@ -156,7 +167,7 @@ namespace KMZI_2
                 result /= 2;
             }
 
-            while (!pNumbers.IsPrime(result) || basicMath.Find_GCD(result, x) != 1 || result >= x)
+            while (!pNumbers.IsPrime(result, false) || basicMath.Find_GCD(result, x) != 1 || result >= x)
             {
                 result++;
             }

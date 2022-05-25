@@ -24,21 +24,36 @@ namespace KMZI_2
         PrimeNumbers pNumbers = new PrimeNumbers();
         BasicNumberTheoryMath basicMath = new BasicNumberTheoryMath();
 
+        // Генерииурет случайное простое Q число заданной длины
         private void button_genRandom_Click(object sender, EventArgs e)
         {
             textBox.Text = pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text));
         }
 
+        // Основная функция
         private void button_genKey_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
+                     
             BigInteger q = BigInteger.Parse(textBox.Text);
+            if (!pNumbers.IsPrime(q, false))
+            {
+                MessageBox.Show("Введенное число не является простым", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                return;
+            }
             BigInteger p = 2 * q + 1;
             BigInteger g = 0;
 
+            while (!pNumbers.IsPrime(p, false))
+            {
+                textBox.Text = pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text));
+                q = BigInteger.Parse(textBox.Text);
+                p = 2 * q + 1;
+            }
+
             //сначала сделаем p, q, g
-            bool isPrime = false;
-            while (!isPrime)
+            bool isOk = false;
+            while (!isOk)
             {
                 if (p >= int.MaxValue)
                 {
@@ -51,16 +66,25 @@ namespace KMZI_2
 
                 if (g < p - 1 && basicMath.Find_ModularExpo(g, q, p) != 1)
                 {
-                    isPrime = true;
+                    isOk = true;
                 }
             }
 
-            //Делаем случайныйе большие числа
-            BigInteger Xa = BigInteger.Parse(pNumbers.GeneratePrime(10));
-            BigInteger Xb = BigInteger.Parse(pNumbers.GeneratePrime(10));
+            //Делаем случайныйе большие числа            
+            BigInteger Xa = BigInteger.Parse(pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text)));
+            while (Xa == q)
+            {
+                Xa = BigInteger.Parse(pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text)));
+            }
+            BigInteger Xb = BigInteger.Parse(pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text)));
+            while (Xb == Xa)
+            {
+                Xb = BigInteger.Parse(pNumbers.GeneratePrime(Convert.ToInt32(text_length.Text)));
+            }
 
-            BigInteger Ya = basicMath.Find_ModularExpo(q, Xa, p);
-            BigInteger Yb = basicMath.Find_ModularExpo(q, Xb, p);
+            BigInteger Ya = basicMath.Find_ModularExpo(g, Xa, p);
+
+            BigInteger Yb = basicMath.Find_ModularExpo(g, Xb, p);
 
             BigInteger Zab = basicMath.Find_ModularExpo(Yb, Xa, p);
             BigInteger Zba = basicMath.Find_ModularExpo(Ya, Xb, p);

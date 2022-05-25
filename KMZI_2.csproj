@@ -62,12 +62,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\BigIntBlocks.cs" />
     <Compile Include="Classes\BasicNumberTheoryMath.cs" />
-    <Compile Include="Diffi-Hellman.cs">
+    <Compile Include="Forms\EpGOST.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Diffi-Hellman.Designer.cs">
+    <Compile Include="Forms\EpGOST.Designer.cs">
+      <DependentUpon>EpGOST.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Diffi-Hellman.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Diffi-Hellman.Designer.cs">
       <DependentUpon>Diffi-Hellman.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ElGamal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ElGamal.Designer.cs">
+      <DependentUpon>ElGamal.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\NumberTheory.cs">
       <SubType>Form</SubType>
@@ -77,6 +90,27 @@
     </Compile>
     <Compile Include="Classes\PrimeNumbers.cs" />
     <Compile Include="Classes\Program.cs" />
+    <Compile Include="Forms\GOST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GOST.Designer.cs">
+      <DependentUpon>GOST.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MD5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MD5.Designer.cs">
+      <DependentUpon>MD5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\MyMD5.cs" />
+    <Compile Include="Forms\MD5_info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MD5_info.Designer.cs">
+      <DependentUpon>MD5_info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\MySHA.cs" />
+    <Compile Include="Classes\Hash_GOST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\RSA.cs">
       <SubType>Form</SubType>
@@ -96,11 +130,50 @@
     <Compile Include="Forms\RSA_SaveType.Designer.cs">
       <DependentUpon>RSA_SaveType.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Diffi-Hellman.resx">
+    <Compile Include="Forms\Shamir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Shamir.Designer.cs">
+      <DependentUpon>Shamir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SHA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SHA.Designer.cs">
+      <DependentUpon>SHA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SecretChat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SecretChat.Designer.cs">
+      <DependentUpon>SecretChat.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Forms\Diffi-Hellman.resx">
       <DependentUpon>Diffi-Hellman.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ElGamal.resx">
+      <DependentUpon>ElGamal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EpGOST.resx">
+      <DependentUpon>EpGOST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GOST.resx">
+      <DependentUpon>GOST.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MD5_info.resx">
+      <DependentUpon>MD5_info.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\NumberTheory.resx">
       <DependentUpon>NumberTheory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MD5.resx">
+      <DependentUpon>MD5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SecretChat.resx">
+      <DependentUpon>SecretChat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SHA.resx">
+      <DependentUpon>SHA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -110,6 +183,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\RSA.resx">
       <DependentUpon>RSA.cs</DependentUpon>
@@ -119,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RSA_SaveType.resx">
       <DependentUpon>RSA_SaveType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Shamir.resx">
+      <DependentUpon>Shamir.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -147,6 +224,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\File-icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\free-icon-clear-3602317.png" />
+    <None Include="Resources\free-icon-clear-36023171.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -126,7 +126,7 @@ namespace KMZI_2
                     }
                     else
                     {
-                        MessageBox.Show("Основание и модуль н еявляются взаимно простыми", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        MessageBox.Show("Основание и модуль не являются взаимно простыми", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
                     }
                 }
                 else

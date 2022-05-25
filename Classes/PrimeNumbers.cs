@@ -136,7 +136,7 @@ namespace KMZI_2
         public int primeMin = 256;
         public int primeMax = 2147483647;
 
-        public bool IsPrime(BigInteger digit)
+        public bool IsPrime(BigInteger digit, bool detailed)
         {
             if (primeCollection.Contains(digit))
             {
@@ -151,20 +151,37 @@ namespace KMZI_2
                 }
             }
 
-            if (digit > 1 && digit % 2 != 0 && digit < int.MaxValue)
+            BigInteger d = digit - 1;
+            int s = 0;
+            while (d % 2 == 0 && d > 0)
             {
-                int digit2 = (int)digit;
-                for (int i = 2; i < Math.Sqrt(digit2) + 1; i++)
-                {
-                    if (digit % i == 0)
-                    {
-                        return false;
-                    }
-                }
-
+                d /= 2;
+                s += 1;
             }
 
-            return true;
+            Random rnd = new Random();
+
+            int a = rnd.Next(2, int.MaxValue);
+            for (int i = 0; i < 5; i++)
+            {
+                a = rnd.Next(2, int.MaxValue);
+
+                if (Find_ModularExpo(a, d, digit) == 1)
+                {
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < s; i++)
+            {
+                BigInteger degree = (BigInteger)Math.Pow(2, i) * d;
+                if (Find_ModularExpo(a, degree, digit) == digit - 1)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public string GeneratePrime(int length)
@@ -173,14 +190,14 @@ namespace KMZI_2
 
             BigInteger primeSize = BigInteger.Pow(10, length - 1);
             BigInteger result = 0;
-
+            int s = 0;
             while (!isPrime)
             {
                 Random rnd = new Random();
                 BigInteger k = rnd.Next(2, int.MaxValue);
                 BigInteger d = 2 * k + 1;
                 BigInteger n = d;
-                int s = 0;
+                s = 0;
 
                 while (n < primeSize)
                 {
@@ -195,12 +212,16 @@ namespace KMZI_2
                 }
 
                 int a = rnd.Next(2, int.MaxValue);
-
-                if (Find_ModularExpo(a, d, n) == 1)
+                for (int i = 0; i < 5; i++)
                 {
-                    isPrime = true;
-                    result = n;
-                    break;
+                    a = rnd.Next(2, int.MaxValue);
+
+                    if (Find_ModularExpo(a, d, n) == 1)
+                    {
+                        isPrime = true;
+                        result = n;
+                        break;
+                    }
                 }
 
                 for (int i = 0; i < s; i++)
@@ -212,13 +233,7 @@ namespace KMZI_2
                         result = n;
                         break;
                     }
-                }
-
-                n += 2;
-                if (n % 5 == 0)
-                {
-                    n += 2;
-                }
+                }              
             }
 
             return result.ToString();
